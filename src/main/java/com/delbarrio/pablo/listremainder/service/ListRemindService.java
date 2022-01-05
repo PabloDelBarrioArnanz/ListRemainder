@@ -1,5 +1,6 @@
 package com.delbarrio.pablo.listremainder.service;
 
+import com.delbarrio.pablo.listremainder.document.ListRemind;
 import com.delbarrio.pablo.listremainder.dto.ListRemindDto;
 import com.delbarrio.pablo.listremainder.mapper.ListRemindMapper;
 import com.delbarrio.pablo.listremainder.repository.ListRemindRepository;
@@ -7,6 +8,11 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
+
+import java.util.Optional;
+import java.util.function.Consumer;
+
+import static com.delbarrio.pablo.listremainder.constant.ConstantDefinition.VALIDATION_ERROR;
 
 @Service
 @AllArgsConstructor
@@ -26,8 +32,10 @@ public class ListRemindService {
   }
 
   public Mono<ListRemindDto> save(ListRemindDto listRemindDto) {
-    return Mono.just(listRemindMapper.toEntity(listRemindDto))
-        //TODO set lowest priority if null
+    return Mono.just(listRemindDto)
+        .doOnNext(checkErrors)
+        .map(listRemindMapper::toEntity)
+        .doOnNext(setPriorityIfNull)
         .flatMap(listRemindRepository::save)
         .map(listRemindMapper::toDto);
   }
@@ -35,4 +43,16 @@ public class ListRemindService {
   public Mono<Void> deleteById(String id) {
     return listRemindRepository.deleteById(id);
   }
+
+  public Mono<Void> deleteAll() {
+    return listRemindRepository.deleteAll();
+  }
+
+  private static final Consumer<ListRemind> setPriorityIfNull = listRemind -> Optional.ofNullable(listRemind.getPriority())
+      .ifPresentOrElse(t -> {}, () -> listRemind.setPriority(5));
+
+  private static final Consumer<ListRemindDto> checkErrors = listRemindDto -> Optional.ofNullable(listRemindDto)
+      .filter(list -> 1 < list.getName().length() && list.getName().length() < 120)
+      .filter(list -> 1 < list.getText().length() && list.getText().length() < 120)
+      .orElseThrow(() -> new RuntimeException(VALIDATION_ERROR));
 }

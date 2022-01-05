@@ -22,6 +22,7 @@ public class Route {
     return route(GET(API).or(GET(API_LIST_ALL)), listRemindHandler::list)
         .andRoute(GET(API_FIND_ONE), listRemindHandler::detail)
         .andRoute(POST(API).or(POST(API_CREATE)), listRemindHandler::create)
-        .andRoute(DELETE(API).or(DELETE(API_DELETE)), listRemindHandler::delete);
+        .andRoute(DELETE(API).or(DELETE(API_DELETE)), listRemindHandler::delete)
+        .andRoute(DELETE(API_DELETE_ALL), listRemindHandler::deleteAll);
   }
 }

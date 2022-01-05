@@ -13,5 +13,9 @@ public class ConstantDefinition {
   public static final String API_EDIT = API.concat("/edit");
   public static final String API_CREATE = API.concat("/create");
   public static final String API_DELETE = API.concat("/delete");
+  public static final String API_DELETE_ALL = API.concat("/delete-all");
   public static final String API_REDIRECT = API.concat(NAME_QUERY_PARAM);
+
+
+  public static final String VALIDATION_ERROR = "Malformed list name and content cannot be empty";
 }
