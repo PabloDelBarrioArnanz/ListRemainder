@@ -18,10 +18,10 @@ public class LogInfoRequestDTO {
   @Override
   public String toString() {
     return "Received Request => " +
-        "Id: " + id +
+        "{Id: " + id +
         ", Method: " + method +
         ", Path: " + path +
         ", Headers: " + headers +
-        ", Body: " + body;
+        ", Body: " + body + "}";
   }
 }

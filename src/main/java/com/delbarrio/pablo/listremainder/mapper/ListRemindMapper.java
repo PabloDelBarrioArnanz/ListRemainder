@@ -9,7 +9,6 @@ import java.util.List;
 @Mapper(componentModel = "spring")
 public interface ListRemindMapper {
 
-  //TODO make this reactive?
   ListRemind toEntity(ListRemindDto listRemindDto);
 
   ListRemindDto toDto(ListRemind listRemind);

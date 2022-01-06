@@ -10,14 +10,16 @@ import java.util.Map;
 public class LogInfoResponseDTO {
 
   private final String id;
+  private final String statusCode;
   private final Map<String, String> headers;
   private final String body;
 
   @Override
   public String toString() {
     return "Received Request => " +
-        "Id: " + id +
+        "{Id: " + id +
+        ", StatusCode: " + statusCode +
         ", Headers: " + headers +
-        ", Body: " + body;
+        ", Body: " + body + "}";
   }
 }

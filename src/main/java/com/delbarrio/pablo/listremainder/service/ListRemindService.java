@@ -11,6 +11,7 @@ import reactor.core.publisher.Mono;
 
 import java.util.Optional;
 import java.util.function.Consumer;
+import java.util.function.Function;
 
 import static com.delbarrio.pablo.listremainder.constant.ConstantDefinition.VALIDATION_ERROR;
 
@@ -32,8 +33,7 @@ public class ListRemindService {
   }
 
   public Mono<ListRemindDto> save(ListRemindDto listRemindDto) {
-    return Mono.just(listRemindDto)
-        .doOnNext(checkErrors)
+    return checkErrors.apply(listRemindDto)
         .map(listRemindMapper::toEntity)
         .doOnNext(setPriorityIfNull)
         .flatMap(listRemindRepository::save)
@@ -51,8 +51,9 @@ public class ListRemindService {
   private static final Consumer<ListRemind> setPriorityIfNull = listRemind -> Optional.ofNullable(listRemind.getPriority())
       .ifPresentOrElse(t -> {}, () -> listRemind.setPriority(5));
 
-  private static final Consumer<ListRemindDto> checkErrors = listRemindDto -> Optional.ofNullable(listRemindDto)
+  private static final Function<ListRemindDto, Mono<ListRemindDto>> checkErrors = listRemindDto -> Optional.ofNullable(listRemindDto)
       .filter(list -> 1 < list.getName().length() && list.getName().length() < 120)
       .filter(list -> 1 < list.getText().length() && list.getText().length() < 120)
+      .map(Mono::just)
       .orElseThrow(() -> new RuntimeException(VALIDATION_ERROR));
 }
