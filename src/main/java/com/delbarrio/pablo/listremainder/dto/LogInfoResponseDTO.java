@@ -16,7 +16,7 @@ public class LogInfoResponseDTO {
 
   @Override
   public String toString() {
-    return "Received Request => " +
+    return "Send Response => " +
         "{Id: " + id +
         ", StatusCode: " + statusCode +
         ", Headers: " + headers +
