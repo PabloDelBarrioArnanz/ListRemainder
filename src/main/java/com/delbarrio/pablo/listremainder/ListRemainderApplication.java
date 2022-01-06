@@ -8,7 +8,6 @@ import org.springframework.data.mongodb.config.EnableMongoAuditing;
 @EnableMongoAuditing
 public class ListRemainderApplication {
 
-  //TODO add logger
   //TODO create ExceptionHandler
   public static void main(String[] args) {
     SpringApplication.run(ListRemainderApplication.class, args);
