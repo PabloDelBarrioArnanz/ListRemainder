@@ -1,4 +1,4 @@
-version: "2"
+version: "3"
 
 services:
   mongo-db:
@@ -6,3 +6,18 @@ services:
     hostname: mongo
     ports:
       - "27017:27017"
+    volumes:
+      - db-data:/var/lib/mongo
+
+  listremainder:
+    image: listremainder:1.0.0
+    hostname: listremainder
+    environment:
+      SPRING_DATASOURCE_URL: mongodb://mongo-db:27017/productsBD
+    depends_on:
+      - mongo-db
+    ports:
+      - "9090:9090"
+
+volumes:
+  db-data:

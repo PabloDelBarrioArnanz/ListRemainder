@@ -4,7 +4,7 @@ server:
 spring:
   data:
     mongodb:
-      uri: ${SPRING_DATASOURCE_URL}
+      uri: mongodb://localhost:27017/productsBD
 
 logging:
   pattern:

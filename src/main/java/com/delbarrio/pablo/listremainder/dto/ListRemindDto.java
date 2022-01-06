@@ -17,6 +17,5 @@ public class ListRemindDto {
   private String name;
   private Integer priority;
   private String text;
-  private LocalDateTime createAt;
   private LocalDateTime lastModifiedAt;
 }
