@@ -1,0 +1,173 @@
+{
+	"info": {
+		"_postman_id": "faebe7a6-65b5-4b3e-a3b4-0f36b872c28c",
+		"name": "ListReminder",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "GetAll",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:9090/listremainder/api/all",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9090",
+					"path": [
+						"listremainder",
+						"api",
+						"all"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Detail",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:9090/listremainder/api/detail?id=61d5f2d7f2ff0e7874329093",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9090",
+					"path": [
+						"listremainder",
+						"api",
+						"detail"
+					],
+					"query": [
+						{
+							"key": "id",
+							"value": "61d5f2d7f2ff0e7874329093"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"Test 1\",\r\n    \"text\": \"New Content\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:9090/listremainder/api",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9090",
+					"path": [
+						"listremainder",
+						"api"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"id\": \"123\",\r\n    \"name\": \"Mi List Fake\",\r\n    \"priority\": 2,\r\n    \"text\": \"Esto es el contenido fake\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:9090/listremainder/api/delete?id=123",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9090",
+					"path": [
+						"listremainder",
+						"api",
+						"delete"
+					],
+					"query": [
+						{
+							"key": "id",
+							"value": "123"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DeleteAll",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"id\": \"123\",\r\n    \"name\": \"Mi List Fake\",\r\n    \"priority\": 2,\r\n    \"text\": \"Esto es el contenido fake\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:9090/listremainder/api/delete-all",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9090",
+					"path": [
+						"listremainder",
+						"api",
+						"delete-all"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetAllGrouped",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:9090/listremainder/api/all-grouped",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9090",
+					"path": [
+						"listremainder",
+						"api",
+						"all-grouped"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
