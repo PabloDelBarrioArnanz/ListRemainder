@@ -10,7 +10,7 @@ services:
       - db-data:/var/lib/mongo
 
   listremainder:
-    image: listremainder:1.0.0
+    image: listremainder:latest
     hostname: listremainder
     environment:
       SPRING_DATASOURCE_URL: mongodb://mongo-db:27017/productsBD
