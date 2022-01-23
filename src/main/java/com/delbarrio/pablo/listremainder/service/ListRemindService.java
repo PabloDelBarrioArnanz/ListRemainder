@@ -9,6 +9,8 @@ import org.springframework.stereotype.Service;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
+import java.util.Collection;
+import java.util.Map;
 import java.util.Optional;
 import java.util.function.Consumer;
 import java.util.function.Function;
@@ -25,6 +27,12 @@ public class ListRemindService {
   public Flux<ListRemindDto> findAll() {
     return listRemindRepository.findAll()
         .map(listRemindMapper::toDto);
+  }
+
+  public Mono<Map<String, Collection<ListRemindDto>>> findAllGrouped() {
+    return listRemindRepository.findAll()
+        .map(listRemindMapper::toDto)
+        .collectMultimap(ListRemindDto::getTopic, Function.identity());
   }
 
   public Mono<ListRemindDto> findById(String id) {
@@ -49,11 +57,13 @@ public class ListRemindService {
   }
 
   private static final Consumer<ListRemind> setPriorityIfNull = listRemind -> Optional.ofNullable(listRemind.getPriority())
-      .ifPresentOrElse(t -> {}, () -> listRemind.setPriority(5));
+      .ifPresentOrElse(t -> {
+      }, () -> listRemind.setPriority(5));
 
   private static final Function<ListRemindDto, Mono<ListRemindDto>> checkErrors = listRemindDto -> Optional.ofNullable(listRemindDto)
       .filter(list -> 1 < list.getName().length() && list.getName().length() < 120)
       .filter(list -> 1 < list.getText().length() && list.getText().length() < 120)
+      .filter(list -> 1 < list.getTopic().length() && list.getTopic().length() < 120)
       .map(Mono::just)
       .orElseThrow(() -> new RuntimeException(VALIDATION_ERROR));
 }

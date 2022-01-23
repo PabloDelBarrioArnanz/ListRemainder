@@ -9,6 +9,7 @@ public class ConstantDefinition {
 
   public static final String API = "/listremainder/api";
   public static final String API_LIST_ALL = API.concat("/all");
+  public static final String API_LIST_ALL_GROUPED = API.concat("/all-grouped");
   public static final String API_FIND_ONE = API.concat("/detail");
   public static final String API_EDIT = API.concat("/edit");
   public static final String API_CREATE = API.concat("/create");

@@ -30,6 +30,12 @@ public class ListRemindHandler {
         .onErrorResume(createErrorServerResponse);
   }
 
+  public Mono<ServerResponse> listGrouped(ServerRequest request) {
+    return ServerResponse.ok()
+        .body(listRemindService.findAllGrouped(), ListRemind.class)
+        .onErrorResume(createErrorServerResponse);
+  }
+
   public Mono<ServerResponse> detail(ServerRequest request) {
     return Mono.just(request.queryParam(ID)
             .orElse("NONE"))
