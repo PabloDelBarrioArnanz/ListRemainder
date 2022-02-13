@@ -1,6 +1,5 @@
 package com.delbarrio.pablo.listremainder.service;
 
-import com.delbarrio.pablo.listremainder.document.ListRemind;
 import com.delbarrio.pablo.listremainder.dto.ListRemindDto;
 import com.delbarrio.pablo.listremainder.mapper.ListRemindMapper;
 import com.delbarrio.pablo.listremainder.repository.ListRemindRepository;
@@ -11,11 +10,9 @@ import reactor.core.publisher.Mono;
 
 import java.util.Collection;
 import java.util.Map;
-import java.util.Optional;
-import java.util.function.Consumer;
 import java.util.function.Function;
 
-import static com.delbarrio.pablo.listremainder.constant.ConstantDefinition.VALIDATION_ERROR;
+import static com.delbarrio.pablo.listremainder.constant.ListRestriction.checkDefaults;
 
 @Service
 @AllArgsConstructor
@@ -40,10 +37,16 @@ public class ListRemindService {
         .map(listRemindMapper::toDto);
   }
 
+  public Flux<ListRemindDto> findByTopic(String topic) {
+    return listRemindRepository.findAllByTopic(topic)
+        .filter(list -> list.getTopic().equals(topic))
+        .map(listRemindMapper::toDto);
+  }
+
   public Mono<ListRemindDto> save(ListRemindDto listRemindDto) {
-    return checkErrors.apply(listRemindDto)
+    return Mono.just(listRemindDto)
+        .map(checkDefaults)
         .map(listRemindMapper::toEntity)
-        .doOnNext(setPriorityIfNull)
         .flatMap(listRemindRepository::save)
         .map(listRemindMapper::toDto);
   }
@@ -56,14 +59,10 @@ public class ListRemindService {
     return listRemindRepository.deleteAll();
   }
 
-  private static final Consumer<ListRemind> setPriorityIfNull = listRemind -> Optional.ofNullable(listRemind.getPriority())
-      .ifPresentOrElse(t -> {
-      }, () -> listRemind.setPriority(5));
-
-  private static final Function<ListRemindDto, Mono<ListRemindDto>> checkErrors = listRemindDto -> Optional.ofNullable(listRemindDto)
-      .filter(list -> 1 < list.getName().length() && list.getName().length() < 120)
-      .filter(list -> 1 < list.getText().length() && list.getText().length() < 120)
-      .filter(list -> 1 < list.getTopic().length() && list.getTopic().length() < 120)
-      .map(Mono::just)
-      .orElseThrow(() -> new RuntimeException(VALIDATION_ERROR));
+  public Flux<ListRemindDto> editTopic(String oldTopic, String newTopic) {
+    return listRemindRepository.findAllByTopic(oldTopic)
+        .doOnNext(list -> list.setTopic(newTopic))
+        .flatMap(listRemindRepository::save)
+        .map(toDo -> listRemindMapper.toDto(toDo));
+  }
 }

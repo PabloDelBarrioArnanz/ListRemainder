@@ -11,15 +11,16 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:9090/listremainder/api/all",
+					"raw": "http://{{host}}:9090/listremainder/api/list/all",
 					"protocol": "http",
 					"host": [
-						"localhost"
+						"{{host}}"
 					],
 					"port": "9090",
 					"path": [
 						"listremainder",
 						"api",
+						"list",
 						"all"
 					]
 				}
@@ -27,15 +28,15 @@
 			"response": []
 		},
 		{
-			"name": "Detail",
+			"name": "GetById",
 			"request": {
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:9090/listremainder/api/detail?id=61d5f2d7f2ff0e7874329093",
+					"raw": "http://{{host}}:9090/listremainder/api/detail?id=61d5f2d7f2ff0e7874329093",
 					"protocol": "http",
 					"host": [
-						"localhost"
+						"{{host}}"
 					],
 					"port": "9090",
 					"path": [
@@ -48,6 +49,56 @@
 							"key": "id",
 							"value": "61d5f2d7f2ff0e7874329093"
 						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetAllByTopic",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://{{host}}:9090/listremainder/api/list/topic?topic=Proyectos",
+					"protocol": "http",
+					"host": [
+						"{{host}}"
+					],
+					"port": "9090",
+					"path": [
+						"listremainder",
+						"api",
+						"list",
+						"topic"
+					],
+					"query": [
+						{
+							"key": "topic",
+							"value": "Proyectos"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetAllGrouped",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://{{host}}:9090/listremainder/api/list/grouped",
+					"protocol": "http",
+					"host": [
+						"{{host}}"
+					],
+					"port": "9090",
+					"path": [
+						"listremainder",
+						"api",
+						"list",
+						"grouped"
 					]
 				}
 			},
@@ -68,10 +119,10 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:9090/listremainder/api",
+					"raw": "http://{{host}}:9090/listremainder/api",
 					"protocol": "http",
 					"host": [
-						"localhost"
+						"{{host}}"
 					],
 					"port": "9090",
 					"path": [
@@ -97,10 +148,10 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:9090/listremainder/api/delete?id=123",
+					"raw": "http://{{host}}:9090/listremainder/api/delete?id=123",
 					"protocol": "http",
 					"host": [
-						"localhost"
+						"{{host}}"
 					],
 					"port": "9090",
 					"path": [
@@ -133,10 +184,10 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:9090/listremainder/api/delete-all",
+					"raw": "http://{{host}}:9090/listremainder/api/delete-all",
 					"protocol": "http",
 					"host": [
-						"localhost"
+						"{{host}}"
 					],
 					"port": "9090",
 					"path": [
@@ -149,21 +200,32 @@
 			"response": []
 		},
 		{
-			"name": "GetAllGrouped",
+			"name": "EditTopic",
 			"request": {
-				"method": "GET",
+				"method": "PUT",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:9090/listremainder/api/all-grouped",
+					"raw": "http://{{host}}:9090/listremainder/api/edit/topic?topic=Proyectos&newTopic=MisCosa",
 					"protocol": "http",
 					"host": [
-						"localhost"
+						"{{host}}"
 					],
 					"port": "9090",
 					"path": [
 						"listremainder",
 						"api",
-						"all-grouped"
+						"edit",
+						"topic"
+					],
+					"query": [
+						{
+							"key": "topic",
+							"value": "Proyectos"
+						},
+						{
+							"key": "newTopic",
+							"value": "MisCosa"
+						}
 					]
 				}
 			},

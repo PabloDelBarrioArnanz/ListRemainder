@@ -20,8 +20,10 @@ public class Route {
   @Bean
   public RouterFunction<ServerResponse> routes() {
     return route(GET(API).or(GET(API_LIST_ALL)), listRemindHandler::list)
-        .andRoute(GET(API_LIST_ALL_GROUPED), listRemindHandler::listGrouped)
+        .andRoute(GET(API_LIST_GROUPED), listRemindHandler::listGrouped)
+        .andRoute(GET(API_LIST_TOPIC), listRemindHandler::listByTopic)
         .andRoute(GET(API_FIND_ONE), listRemindHandler::detail)
+        .andRoute(PUT(API_EDIT_TOPIC), listRemindHandler::editTopic)
         .andRoute(POST(API).or(POST(API_CREATE)), listRemindHandler::create)
         .andRoute(DELETE(API).or(DELETE(API_DELETE)), listRemindHandler::delete)
         .andRoute(DELETE(API_DELETE_ALL), listRemindHandler::deleteAll);
