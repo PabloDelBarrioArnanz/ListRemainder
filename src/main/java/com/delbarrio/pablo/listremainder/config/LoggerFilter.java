@@ -1,5 +1,6 @@
 package com.delbarrio.pablo.listremainder.config;
 
+import com.delbarrio.pablo.listremainder.constant.ConstantDefinition;
 import com.delbarrio.pablo.listremainder.dto.LogInfoRequestDTO;
 import com.delbarrio.pablo.listremainder.dto.LogInfoResponseDTO;
 import io.netty.util.internal.StringUtil;
@@ -23,6 +24,7 @@ public class LoggerFilter implements WebFilter {
     BodyCaptureExchange bodyCaptureExchange = new BodyCaptureExchange(serverWebExchange);
     String id = UUID.randomUUID().toString();
     return webFilterChain.filter(bodyCaptureExchange)
+        .filter(exchange -> bodyCaptureExchange.getRequest().getPath().toString().contains(ConstantDefinition.API))
         .doOnSuccess(exchange -> {
           BodyCaptureRequest request = bodyCaptureExchange.getRequest();
           BodyCaptureResponse response = bodyCaptureExchange.getResponse();
