@@ -11,12 +11,12 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://{{host}}:9090/listremainder/api/list/all",
+					"raw": "http://{{host}}:8080/listremainder/api/list/all",
 					"protocol": "http",
 					"host": [
 						"{{host}}"
 					],
-					"port": "9090",
+					"port": "8080",
 					"path": [
 						"listremainder",
 						"api",
@@ -33,12 +33,12 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://{{host}}:9090/listremainder/api/detail?id=61d5f2d7f2ff0e7874329093",
+					"raw": "http://{{host}}:8080/listremainder/api/detail?id=61d5f2d7f2ff0e7874329093",
 					"protocol": "http",
 					"host": [
 						"{{host}}"
 					],
-					"port": "9090",
+					"port": "8080",
 					"path": [
 						"listremainder",
 						"api",
@@ -60,12 +60,12 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://{{host}}:9090/listremainder/api/list/topic?topic=Proyectos",
+					"raw": "http://{{host}}:8080/listremainder/api/list/topic?topic=MisCosa",
 					"protocol": "http",
 					"host": [
 						"{{host}}"
 					],
-					"port": "9090",
+					"port": "8080",
 					"path": [
 						"listremainder",
 						"api",
@@ -75,7 +75,7 @@
 					"query": [
 						{
 							"key": "topic",
-							"value": "Proyectos"
+							"value": "MisCosa"
 						}
 					]
 				}
@@ -88,12 +88,12 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://{{host}}:9090/listremainder/api/list/grouped",
+					"raw": "http://{{host}}:8080/listremainder/api/list/grouped",
 					"protocol": "http",
 					"host": [
 						"{{host}}"
 					],
-					"port": "9090",
+					"port": "8080",
 					"path": [
 						"listremainder",
 						"api",
@@ -111,7 +111,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"name\": \"Test 1\",\r\n    \"text\": \"New Content\"\r\n}",
+					"raw": "{\r\n    \"id\": \"30d0062c-a781-432d-943a-3f8ce4a7945c\",\r\n    \"name\": \"Pfdgos edited again and again new\",\r\n    \"topic\": \"Proyectos\",\r\n    \"priority\": 3,\r\n    \"text\": \"Permitir editar los topicos por lo que se agrupa\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -119,12 +119,12 @@
 					}
 				},
 				"url": {
-					"raw": "http://{{host}}:9090/listremainder/api",
+					"raw": "http://{{host}}:8080/listremainder/api",
 					"protocol": "http",
 					"host": [
 						"{{host}}"
 					],
-					"port": "9090",
+					"port": "8080",
 					"path": [
 						"listremainder",
 						"api"
@@ -148,12 +148,12 @@
 					}
 				},
 				"url": {
-					"raw": "http://{{host}}:9090/listremainder/api/delete?id=123",
+					"raw": "http://{{host}}:8080/listremainder/api/delete?id=123",
 					"protocol": "http",
 					"host": [
 						"{{host}}"
 					],
-					"port": "9090",
+					"port": "8080",
 					"path": [
 						"listremainder",
 						"api",
@@ -184,12 +184,12 @@
 					}
 				},
 				"url": {
-					"raw": "http://{{host}}:9090/listremainder/api/delete-all",
+					"raw": "http://{{host}}:8080/listremainder/api/delete-all",
 					"protocol": "http",
 					"host": [
 						"{{host}}"
 					],
-					"port": "9090",
+					"port": "8080",
 					"path": [
 						"listremainder",
 						"api",
@@ -205,12 +205,12 @@
 				"method": "PUT",
 				"header": [],
 				"url": {
-					"raw": "http://{{host}}:9090/listremainder/api/edit/topic?topic=Proyectos&newTopic=MisCosa",
+					"raw": "http://{{host}}:8080/listremainder/api/edit/topic?topic=Proyecto&newTopic=MisCosa",
 					"protocol": "http",
 					"host": [
 						"{{host}}"
 					],
-					"port": "9090",
+					"port": "8080",
 					"path": [
 						"listremainder",
 						"api",
@@ -220,7 +220,7 @@
 					"query": [
 						{
 							"key": "topic",
-							"value": "Proyectos"
+							"value": "Proyecto"
 						},
 						{
 							"key": "newTopic",

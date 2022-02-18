@@ -2,6 +2,7 @@ version: "3"
 
 services:
   mongo-db:
+    container_name: mongo
     image: mongo:3.4
     hostname: mongo
     ports:
@@ -10,6 +11,7 @@ services:
       - db-data:/var/lib/mongo
 
   prometheus:
+    container_name: prometheus
     image: prom/prometheus:v2.1.0
     volumes:
       - ./prometheus/:/etc/prometheus/
@@ -20,10 +22,11 @@ services:
       - '--web.console.libraries=/usr/share/prometheus/console_libraries'
       - '--web.console.templates=/usr/share/prometheus/consoles'
     ports:
-      - "8080:8080"
+      - "9090:9090"
     restart: always
 
   grafana:
+    container_name: grafana
     image: grafana/grafana
     depends_on:
       - prometheus
@@ -37,6 +40,7 @@ services:
     restart: always
 
   listremainder:
+    container_name: listremainder
     image: listremainder:latest
     hostname: listremainder
     environment:
@@ -44,7 +48,7 @@ services:
     depends_on:
       - mongo-db
     ports:
-      - "9090:9090"
+      - "8080:8080"
 
 volumes:
   db-data:
